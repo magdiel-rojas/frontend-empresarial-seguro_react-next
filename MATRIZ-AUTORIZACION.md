@@ -8,7 +8,7 @@ en vez de vivir en la politica, y eso es un hallazgo que hay que anotar.
 | Operacion | ANALISTA | APROBADOR | AUDITOR | Condicion ABAC | authz.ts |
 |---|---|---|---|---|---|
 | Ver solicitud | Solo su sucursal | Solo su sucursal | Todas | s.sucursalId === actor.sucursalId, salvo AUDITOR | L17 |
-| Crear solicitud | Si | No | No | actor.rol !== 'ANALISTA' | L29 |
+| Crear solicitud | Si | No | No | actor.rol !== 'ANALISTA' | L26 |
 | Resolver solicitud | No | Si (con 3 condiciones) | No | misma sucursal + estado PENDIENTE + no es quien la creo | L37 |
 | Ver bitacora | | | | | L54 |
 
