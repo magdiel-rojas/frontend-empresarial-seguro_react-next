@@ -15,16 +15,16 @@ Una fila por control. En "Cómo se verifica" va el comando exacto, no una idea.
 
 | # | Control | Dónde vive (archivo) | Cómo se verifica (comando) | Estado |
 |---|---|---|---|---|
-| 1 | Sesión validada en servidor por render | | `npm run build` (la ruta sale dinámica) | |
-| 2 | Ninguna ruta autenticada estática | | `npm run build` (leer la tabla) | |
-| 3 | Acceso a datos solo tras el repositorio | | | |
-| 4 | `ResultadoAccion` uniforme, sin filtrar detalle | | | |
-| 5 | `error.tsx` no renderiza `error.message` | | | |
-| 6 | Allowlist anti-SSRF en fetch de servidor | | `npx vitest run tests/unit/practica-3/extra/outbound.test.ts` | |
-| 7 | Autorización pegada al dato (sin IDOR) | | `npm run e2e` | |
-| 8 | Doble control (el creador no aprueba) | | `npm run test:authz` | |
-| 9 | Cookie de sesión endurecida | | `npm run e2e` | |
-| 10 | Middleware como capa, no como borde | | | |
+| 1 | Sesión validada en servidor por render | src/app/**/page.tsx | `npm run build` (la ruta sale dinámica) | Cubierto |
+| 2 | Ninguna ruta autenticada estática | src/app/**/page.tsx | `npm run build` (leer la tabla) | Cubierto |
+| 3 | Acceso a datos solo tras el repositorio | src/lib/repository.ts y rutas/Server Actions que acceden a datos | `npm run test:p3` | Cubierto |
+| 4 | `ResultadoAccion` uniforme, sin filtrar detalle | Server Actions de `src/app/` y tipos de acciones | `npm run test:p3` | Cubierto |
+| 5 | `error.tsx` no renderiza `error.message` | `src/app/**/error.tsx` | `npm run test:p3` |Cubierto |
+| 6 | Allowlist anti-SSRF en fetch de servidor | `src/lib/outbound.ts` | `npx vitest run tests/unit/practica-3/extra/outbound.test.ts` | Cubierto |
+| 7 | Autorización pegada al dato (sin IDOR) | `src/lib/authz.ts`  y acceso a solicitudes | `npm run e2e` | Cubierto |
+| 8 | Doble control (el creador no aprueba) | `src/lib/authz.ts` y flujo de aprobacion | `npm run test:authz`  | Cubierto |
+| 9 | Cookie de sesión endurecida | `src/lib/sesion.ts` | `npx playwright test tests/e2e/auth.spec.ts` | Cubierto|
+| 10 | Middleware como capa, no como borde | `src/proxy.ts` / middleware de proteccion | `npm run build` y `npx playwright test tests/e2e/auth.spec.ts` | Cubierto |
 
 Estado: `Cubierto` / `Parcial` / `No cubierto`. Si es parcial, decí qué falta.
 
